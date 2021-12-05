@@ -13,6 +13,12 @@ import time
 import cv2
 import os
 
+### commenting out robot code for now
+#from gpiozero import Motor
+#from gpiozero import Robot
+
+#robot = Robot((4, 14), (17, 27))
+
 def detect_and_predict_mask(frame, faceNet, maskNet):
 	# grab the dimensions of the frame and then construct a blob
 	# from it
@@ -137,11 +143,20 @@ while True:
 			
 			distance = pow(center_x - frame_center_x, 2)+pow(center_y - frame_center_y, 2)
 			print(distance)
-			if (distance < 3000): 
+
+			area = (endY - startY) * (endX - endY) 
+
+			if (area > 3000):
+				#robot.stop()
+				print("Stop moving")			
+			elif (distance < 3000):
+				#robot.forward() 
 				print("Move forwards")
 			elif (center_x > frame_center_x):
+				#robot.left()
 				print("Pan left")
 			else: 
+				#robot.right()
 				print("Pan right")   
 		
 		counter = counter + 1 
