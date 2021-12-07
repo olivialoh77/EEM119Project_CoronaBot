@@ -2,8 +2,8 @@
 const int motorIn1L = 27;
 const int motorIn2L = 26;
 const int motorEnL = 12;
-const int motorIn1R = 27;
-const int motorIn2R = 26;
+const int motorIn1R = 32;
+const int motorIn2R = 33;
 const int motorEnR = 12;
 int dir;
 
@@ -25,7 +25,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  dir = Serial.read();
+  dir = Serial.read().toInt();
   switch(dir) {
     case 1:
       left();
@@ -40,10 +40,11 @@ void loop() {
       back();
       break;
     case 5:
-      break();
+      brake();
       break;
     default:
-      break;
+      brake();
+      break;    
   }
   delay(100);
 }
@@ -90,6 +91,6 @@ void brake() {
   digitalWrite(motorIn1L, HIGH);
   digitalWrite(motorIn2L, HIGH);
   digitalWrite(motorIn1R, HIGH);
-  digitalWrite(motorIn2R, HIGH);
+  digitalWrite(motorIn2R, HIGH);  
 }
 
